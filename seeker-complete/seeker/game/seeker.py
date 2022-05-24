@@ -34,3 +34,29 @@ class Seeker:
             location (int): The given location.
         """
         self._location = location
+
+
+    #def __init__(self):
+        #"""Constructs a new Guesser.
+        # 
+        # Args:
+        #   self (Guesser): An instance of Guesser.
+        # """
+        #self._guess = " "
+
+
+    #def get_guess(self):
+        #"""Gets the current guess.
+        # 
+        # Returns:
+        #   letter: The current guess,
+        # """
+        #return self._guess
+
+    #def update_guess(self, guess):
+        #"""Updates the guess.
+        # 
+        # Args:
+        #   self (Guesser): An instance of Guesser.
+        #   guess (str): The users guess."""
+        #self._guess = guess
