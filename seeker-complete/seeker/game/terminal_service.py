@@ -27,7 +27,7 @@ class TerminalService:
         Returns:
             float: The user's input as a number.
         """
-        return float(input(prompt))
+        return input(prompt)
         
     def write_text(self, text):
         """Displays the given text on the terminal. 

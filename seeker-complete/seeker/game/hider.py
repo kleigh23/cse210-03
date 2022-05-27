@@ -3,12 +3,11 @@ import random
 wordlist = ["about", "above", "actor", "acute", "admit"]
 word_to_use = random.choice(wordlist)
 list_of_letter = list(word_to_use)
-list_for_distance = []
+tries = int(0)
 
+parachute_man =[
 
-
-
-five_to_go =("""\
+"""\
 
 --------
   __
@@ -22,9 +21,8 @@ five_to_go =("""\
 
 --------
 Five to go!
-""")
-
-four_to_go =("""\
+""",
+"""\
 
 --------
     
@@ -38,10 +36,8 @@ four_to_go =("""\
 
 --------
 Four to go!
-""")
-
-three_to_go = ("""\
-
+""",
+"""\
 --------
     
      
@@ -54,10 +50,8 @@ three_to_go = ("""\
 
 --------
 Three to go!
-""")
-
-two_to_go= ("""\
-
+""",
+"""\
 --------
      
      
@@ -69,9 +63,9 @@ two_to_go= ("""\
 
 --------
 Two to go!
-""")
+""",
 
-one_to_go= ("""\
+"""\
 
 --------
      
@@ -82,9 +76,9 @@ one_to_go= ("""\
 
 --------
 ONE to go!
-""")
+""",
 
-fail_to_go = ("""\
+"""\
 
 --------
  
@@ -94,24 +88,13 @@ fail_to_go = ("""\
 
 --------
 Too bad!!
-""")
+""", 
 
-success_to_go = ("You did it!!!!")
+"""\
+YOU WIN!!!!
+"""\
+]
 
-if list_for_distance(len)==0:
-    stage = five_to_go
-elif list_for_distance(len)==1:
-    stage = four_to_go
-elif list_for_distance(len)==2:
-    stage = three_to_go
-elif list_for_distance(len)==3:
-    stage = two_to_go
-elif list_for_distance(len)==4:
-    stage = one_to_go
-elif list_for_distance(len)==5:
-    stage = fail_to_go
-elif list_for_distance(len)>=10:
-    stage = success_to_go
 
 class Hider:
     """The drawing of the parachute man. 
@@ -130,7 +113,7 @@ class Hider:
             self (Hider): An instance of Hider.
         """
         self._location = word_to_use
-        self._distance = five_to_go
+        self._distance = parachute_man[tries]
     
     def get_hint(self):
         """Gets a hint for the seeker.
@@ -145,18 +128,21 @@ class Hider:
             string: A hint for the seeker.
         """
         hint = "Time to type something."
-        if self._distance == five_to_go:
+        if self._distance == parachute_man[tries]:
+            print(f"{parachute_man[0]}")
             hint = "There's still 5 chances"
-        elif self._distance == four_to_go:
+        elif self._distance == parachute_man[1]:
             hint = "There's still 4 chances"
-        elif self._distance == three_to_go:
+        elif self._distance ==parachute_man[2]:
             hint = "There's still 3 chances"
-        elif self._distance == two_to_go:
+        elif self._distance == parachute_man[3]:
             hint = "There's still 2 chances"
-        elif self._distance == one_to_go:
+        elif self._distance == parachute_man[4]:
             hint = "There's still 1 chances"
-        elif self._distance == fail_to_go:
+        elif self._distance == parachute_man[5]:
             hint = "Got to restart!"
+        elif self._distance == parachute_man[6]:
+            hint = "You won already!"
         return hint
 
 
@@ -193,7 +179,8 @@ class Hider:
         Returns:
             boolean: True if the hider was found; false if otherwise.
         """
-        return (self._distance== success_to_go)
+        if self._distance == parachute_man[6]:
+            return True
         
     def watch_seeker(self, seeker):
         """Watches the seeker by keeping track of how far away it is.
@@ -208,7 +195,8 @@ class Hider:
             print("Good guess!")
         else:
             print("nope")
-        list_for_distance.append(1)
+            # tries+=1
+            # return
 
 
     

@@ -43,8 +43,8 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        new_location = self._terminal_service.read_number("\nEnter a location [1-1000]: ")
-        self._seeker.move_location(new_location)
+        new_location = self._terminal_service.read_number("\nEnter a letter: ")
+        self._seeker.update_guess(new_location)
         
     def _do_updates(self):
         """Keeps watch on where the seeker is moving.
