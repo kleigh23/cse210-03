@@ -1,13 +1,11 @@
-# Seeker
-Experience the thrill of the chase! <i>Seeker</i> might seem easy but even the best get lost 
-from time to time. The rules are simple. The seeker guesses the hider's location and the hider 
-provides a hint - that's confidence! Guessing continues until the hider is found.
+# Jumper
+Jumper is a game in which the player seeks to solve a puzzle by guessing the letters of a secret word one at a time. Action! Thrills! A neverending barrage of words and letters blasting you in the face! In order to avoid overheating your graphics card with our awesomeness we've just created a text only game for now.
 
 ---
 ## Getting Started
 Make sure you have Python 3.8.0 or newer installed and running on your machine. Open a terminal and browse to the project's root folder. Start the program by running the following command.
 ```
-python3 seeker 
+python3 jumper 
 ```
 You can also run the program from an IDE like Visual Studio Code. Start your IDE and open the project folder. Select the main module inside the hunter folder and click the "run" icon.
 
@@ -15,7 +13,7 @@ You can also run the program from an IDE like Visual Studio Code. Start your IDE
 The project files and folders are organized as follows:
 ```
 root                    (project root folder)
-+-- seeker              (source code for game)
++-- jumper              (source code for game)
   +-- game              (specific classes)
   +-- __main__.py       (program entry point)
 +-- README.md           (general info)
@@ -25,40 +23,8 @@ root                    (project root folder)
 * Python 3.8.0
 
 ## Authors
-* Matt Manley (manleym@byui.edu)
-* Scott Burton (burtons@byui.edu)
+* Kelley Robertson (Kelley created the repo, worked on "guesser" and "terminal_support" and finished cracking an issue we had on the way director was working. An MVP performance!)
+* Cristian Avendaño (Cristian worked on "Parachute", and went along the code for proofreading and debugging purposes)
+* Shanny López (Shanny was involved in the kickoff meeting and provided us with her insight and support from the start, but due to factors beyond her control she couldn't directly work on the code this time around.)
 
-- kelley will create the repository
-
-- send kelley a link for adding people to repo
-
-list of words, pick one at random, start hangman
-
-everyone- Director: handles the game itself- here we'll mark the words and replace the dashes by letters or remove the pieces of the parachute.
-
-cristian- Hider: The jumper itself. Here we will use a word list instead of a number range. We will pick one word at random -- here we mark the drawing!
-
-kelley - Seeker: The user will try to guess the word at random letter by letter. We'll import the word, break it down into individual letters, and then check if the user's input matches these.
-
-shanny- Terminal Service: instead of numbers, ensure it updates based on text strings, this reads the input as is then used by director to continue the game.
-
-
-word from the word list must have the same character count (will make the process easier).
-
-_e___
-
-"drawing" of the parachute should be done by index ("add \ on index[1] for ex), then remove these one by one as they get it wrong
-
-hider
-
---------
- ___
-/___\
-\   /
- \ /
-  0
- /|\
- / \
-
-^^^^^^^^
 

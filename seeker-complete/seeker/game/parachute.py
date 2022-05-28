@@ -1,21 +1,23 @@
 import random
 
 
-class Hider:
+class Parachute:
     """The drawing of the parachute man. 
     
-    The responsibility of Hider is to keep track of its location and distance from the seeker. 
+    The responsibility of Parachute is to keep track of the drawing and messages being displayed. 
     
     Attributes:
-        _location (int): The location of the hider (1-1000). / ill use this to have a random word chosen
-        _distance (List[int]): The distance from the seeker. / I'll use this to mark the "status" of the parachute man
+        _location : We'll use this to have a choose a random word. Called "location" because it's the place were we're storing this word.
+        _list_of_letter : The list of letters that compose the random word
+        _word_completion : The amount of "completion" of the random word, we keep track of it with underscores (for ex: "ac__r" for "actor")
+        _distance : The "distance" the parachute man picture has travelled! We'll use this to mark the "status" of the parachute man drawing and the message
     """
 
     def __init__(self):
-        """Constructs a new Hider.
+        """Constructs a new Parachute.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Parachute): An instance of Parachute.
         """
         wordlist = ["about", "above", "actor", "acute", "admit"]
         self._location = random.choice(wordlist)
@@ -24,16 +26,13 @@ class Hider:
         self._distance = 0
     
     def get_hint(self):
-        """Gets a hint for the seeker.
-        
-        Got to use this to mark the status! If you type a letter that fits, it should keep the current status (ex. five to go), if not it goes down one status (ex. four to go, and so on)
-        Should this be done on director?
+        """Writes the text prompt and displays the correct picture. We're storing the pictures as elements from a list.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Parachute): An instance of Parachute.
         
         Returns:
-            string: A hint for the seeker.
+            string: A hint for the user.
         """
         parachute_man =["""\
 
@@ -157,74 +156,36 @@ class Hider:
         return hint
 
 
-    # def get_hint(self):
-    #     """Gets a hint for the seeker.
-     
- 
-    #     Args:
-    #         self (Hider): An instance of Hider.
-        
-    #     Returns:
-    #         string: A hint for the seeker.
-    #     """
-    #     hint = "(-.-) Nap time."
-    #     if self._distance[-1] == 0:
-    #         hint = "(;.;) You found me!"
-    #     elif self._distance[-1] > self._distance[-2]:
-    #         hint = "(^.^) Getting colder!"
-    #     elif self._distance[-1] < self._distance[-2]:
-    #         hint = "(>.<) Getting warmer!"
-    #     return hint
-
-
-
-
     def is_found(self):
-        """Whether or not the hider has been found.
+        """Whether or not the Parachute has been found.
 
         Here we mark if it's a success, and if so we don't update the status anymore.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Parachute): An instance of Parachute.
             
         Returns:
-            boolean: True if the hider was found; false if otherwise.
+            boolean: True if the Parachute was found; false if otherwise.
         """
         if self._word_completion == self._location:
             print("you won the game!")
             return True
         
-    def watch_seeker(self, seeker):
-        """Watches the seeker by keeping track of how far away it is.
-
-        Here we mark if the letter fits or not.
-
+    def watch_guesser(self, guesser):
+        """Here we mark if the letter that has been written by the user is useful or not.
 
         Args:
-            self (Hider): An instance of Hider.
+            self (Parachute): An instance of Parachute.
+            guesser: The letter the user has "guessed"
         """
-        if seeker.get_guess() in self._list_of_letter:
+        if guesser.get_guess() in self._list_of_letter:
             word_as_list = list(self._word_completion)
-            indices = [i for i, letter in enumerate(self._location) if letter == seeker.get_guess()]
+            indices = [i for i, letter in enumerate(self._location) if letter == guesser.get_guess()]
             for index in indices:
-                word_as_list[index] = seeker.get_guess()
+                word_as_list[index] = guesser.get_guess()
             self._word_completion = "".join(word_as_list)
             print("Good guess!")
         else:
             print("nope")
             self._distance += 1
             
-
-
-    
-    #  def watch_seeker(self, seeker):
-    #     """Watches the seeker by keeping track of how far away it is.
-
-    #     Here we mark if the letter fits or not.
-
-
-    #     Args:
-    #         self (Hider): An instance of Hider.
-    #     """
-    #     distance = abs(self._location - seeker.get_location())
-    #     self._distance.append(distance)   

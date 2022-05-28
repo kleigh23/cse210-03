@@ -1,6 +1,6 @@
 from game.terminal_service import TerminalService
-from game.hider import Hider
-from game.seeker import Seeker
+from game.parachute import Parachute
+from game.guesser import Guesser
 
 
 class Director:
@@ -9,9 +9,9 @@ class Director:
     The responsibility of a Director is to control the sequence of play.
 
     Attributes:
-        hider (Hider): The game's hider.
+        Parachute (Parachute): The game's Parachute.
         is_playing (boolean): Whether or not to keep playing.
-        seeker (Seeker): The game's seeker.
+        guesser (guesser): The game's guesser (the letter input).
         terminal_service: For getting and displaying information on the terminal.
     """
 
@@ -21,9 +21,9 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._hider = Hider()
+        self._parachute = Parachute()
         self._is_playing = True
-        self._seeker = Seeker()
+        self._guesser = Guesser()
         self._terminal_service = TerminalService()
         
     def start_game(self):
@@ -38,29 +38,32 @@ class Director:
             self._do_outputs()
 
     def _get_inputs(self):
-        """Moves the seeker to a new location.
+        """Retrieves the letter input by the user.
 
         Args:
             self (Director): An instance of Director.
         """
-        new_location = self._terminal_service.read_number("\nEnter a letter: ")
-        self._seeker.update_guess(new_location)
+        new_location = self._terminal_service.read_letter("\nEnter a letter: ")
+        self._guesser.update_guess(new_location)
         
     def _do_updates(self):
-        """Keeps watch on where the seeker is moving.
+        """Take the input form the user, compare it to the list of letters we have.
 
         Args:
             self (Director): An instance of Director.
         """
-        self._hider.watch_seeker(self._seeker)
+        self._parachute.watch_guesser(self._guesser)
         
     def _do_outputs(self):
-        """Provides a hint for the seeker to use.
+        """Based on the input from the user, it provides a drawing and a hint for the guesser to use.
 
         Args:
             self (Director): An instance of Director.
         """
-        hint = self._hider.get_hint()
+        hint = self._parachute.get_hint()
         self._terminal_service.write_text(hint)
-        if self._hider.is_found():
+        if self._parachute.is_found():
+            self._is_playing = False
+        #adding this last bit of code to avoid the game restarting automatically once the user loses
+        if hint == "Got to restart!":
             self._is_playing = False
